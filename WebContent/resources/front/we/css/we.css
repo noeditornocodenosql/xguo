@@ -1,0 +1,8 @@
+@charset "utf-8";
+.we{ width:1062px; height:500px; margin:250px auto auto auto; border:1px solid #E1E1E1;}
+.we .section{ width:942px; height:auto;padding-left:20px; padding-top:20px;}
+.we .section img{ float:right; margin-left:10px;}
+.we .section h1{ color:#41484d; font-size:20px; text-align:left; padding-bottom:15px;font-family:"Microsoft YaHei";background:url(../images/show_dot.png) no-repeat left 7px; padding-left:40px; margin-left:-37px;}
+.we .section p{ text-indent:2em; color:#666; line-height:26px; text-align:left;}
+.we .section #section-1{ padding-left:30px; height:auto;  border-left:1px solid #C5C7C8; padding-bottom:30px;}
+

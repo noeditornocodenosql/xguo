@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.StaticTextMapper">
+<resultMap type="StaticText" id="staticTextResult">
+		<result property="id" column="id"/>
+		<result property="carouselSpan1" column="carouselSpan1"/>
+		<result property="carouselP1" column="carouselP1"/>
+		<result property="carouselSpan2" column="carouselSpan2"/>
+		<result property="carouselP2" column="carouselP2"/>
+		<result property="carouselSpan3" column="carouselSpan3"/>
+		<result property="carouselP3" column="carouselP3"/>
+		<result property="carouselSpan4" column="carouselSpan4"/>
+		<result property="carouselP4" column="carouselP4"/>
+		<result property="businessSpan" column="businessSpan"/>
+		<result property="businessStrong1" column="businessStrong1"/>
+		<result property="businessStrong2" column="businessStrong2"/>
+		<result property="businessStrong3" column="businessStrong3"/>
+		<result property="businessStrong4" column="businessStrong4"/>
+		<result property="businessStrong5" column="businessStrong5"/>
+		<result property="casesSpan" column="casesSpan"/>
+		<result property="clientsCaption" column="clientsCaption"/>
+		<result property="teamCaption" column="teamCaption"/>
+		<result property="dynamicCaption" column="dynamicCaption"/>
+		<result property="aboutusMenuLi1" column="aboutusMenuLi1"/>
+		<result property="aboutusMenuLi2" column="aboutusMenuLi2"/>
+		<result property="aboutusMenuLi3" column="aboutusMenuLi3"/>
+		<result property="aboutusDivStrong1" column="aboutusDivStrong1"/>
+		<result property="aboutusDivP1" column="aboutusDivP1"/>
+		<result property="aboutusDivU1" column="aboutusDivU1"/>
+		<result property="aboutusDivStrong2" column="aboutusDivStrong2"/>
+		<result property="aboutusDivP2_1" column="aboutusDivP2_1"/>
+		<result property="aboutusDivP2_2" column="aboutusDivP2_2"/>
+		<result property="aboutusDivStrong3" column="aboutusDivStrong3"/>
+		<result property="aboutusUlL1" column="aboutusUlL1"/>
+		<result property="aboutusUlL2" column="aboutusUlL2"/>
+		<result property="aboutusUlL3" column="aboutusUlL3"/>
+		<result property="aboutusUlL4" column="aboutusUlL4"/>
+		<result property="aboutusUlL5" column="aboutusUlL5"/>
+		<result property="aboutusTableTd1" column="aboutusTableTd1"/>
+		<result property="aboutusTableTd2" column="aboutusTableTd2"/>
+		<result property="aboutusTableTd3" column="aboutusTableTd3"/>
+		<result property="aboutusTableTd4" column="aboutusTableTd4"/>
+		<result property="aboutusTableTd5" column="aboutusTableTd5"/>
+		<result property="headerUlL1" column="headerUlL1"/>
+		<result property="headerUlL2" column="headerUlL2"/>
+		<result property="headerUlL3" column="headerUlL3"/>
+		<result property="footerName" column="footerName"/>
+		<result property="footerUrlName" column="footerUrlName"/>
+	</resultMap>
+	
+	<select id="findStaticText" resultMap="staticTextResult">
+		select * from xg_staticText
+	</select>
+	
+	<select id="findStaticTextById"  parameterType="Integer" resultMap="staticTextResult">
+		select * from xg_staticText where id=#{id}
+	</select>
+	
+	<update id="updateStaticTextById" parameterType="StaticText">
+		update xg_staticText xg set 
+		xg.carouselSpan1=#{carouselSpan1},
+		xg.carouselP1=#{carouselP1},
+		xg.carouselSpan2=#{carouselSpan2},
+		xg.carouselP2=#{carouselP2},
+		xg.carouselSpan3=#{carouselSpan3},
+		xg.carouselP3=#{carouselP3},
+		xg.carouselSpan4=#{carouselSpan4},
+		xg.carouselP4=#{carouselP4},
+		xg.businessSpan=#{businessSpan},
+		xg.businessStrong1=#{businessStrong1},
+		xg.businessStrong2=#{businessStrong2},
+		xg.businessStrong3=#{businessStrong3},
+		xg.businessStrong4=#{businessStrong4},
+		xg.businessStrong5=#{businessStrong5},
+		xg.casesSpan=#{casesSpan},
+		xg.clientsCaption=#{clientsCaption},
+		xg.teamCaption=#{teamCaption},
+		xg.dynamicCaption=#{dynamicCaption},
+		xg.aboutusMenuLi1=#{aboutusMenuLi1},
+		xg.aboutusMenuLi2=#{aboutusMenuLi2},
+		xg.aboutusMenuLi3=#{aboutusMenuLi3},
+		xg.aboutusDivStrong1=#{aboutusDivStrong1},
+		xg.aboutusDivP1=#{aboutusDivP1},
+		xg.aboutusDivU1=#{aboutusDivU1},
+		xg.aboutusDivStrong2=#{aboutusDivStrong2},
+		xg.aboutusDivP2_1=#{aboutusDivP2_1},
+		xg.aboutusDivP2_2=#{aboutusDivP2_2},
+		xg.aboutusDivStrong3=#{aboutusDivStrong3},
+		xg.aboutusUlL1=#{aboutusUlL1},
+		xg.aboutusUlL2=#{aboutusUlL2},
+		xg.aboutusUlL3=#{aboutusUlL3},
+		xg.aboutusUlL4=#{aboutusUlL4},
+		xg.aboutusUlL5=#{aboutusUlL5},
+		xg.aboutusTableTd1=#{aboutusTableTd1},
+		xg.aboutusTableTd2=#{aboutusTableTd2},
+		xg.aboutusTableTd3=#{aboutusTableTd3},
+		xg.aboutusTableTd4=#{aboutusTableTd4},
+		xg.aboutusTableTd5=#{aboutusTableTd5},
+		xg.headerUlL1=#{headerUlL1},
+		xg.headerUlL2=#{headerUlL2},
+		xg.headerUlL3=#{headerUlL3},
+		xg.footerName=#{footerName},
+		xg.footerUrlName=#{footerUrlName}
+		where xg.id=#{id} 
+	</update>
+	
+</mapper>

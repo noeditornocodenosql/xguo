@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.DynamicCirculateMapper">
+<resultMap type="DynamicCirculate" id="dynamicCirculateResult">
+		<result property="dId" column="dId"/>
+		<result property="bigPictureTitle" column="bigPictureTitle"/>
+		<result property="bigPictureContent" column="bigPictureContent"/>
+		<result property="bigPictureThumbnail" column="bigPictureThumbnail"/>
+		<result property="smallPictureTitle" column="smallPictureTitle"/>
+		<result property="smallPictureCreateTime" column="smallPictureCreateTime"/>
+		<result property="smaliPictureThumbnail" column="smaliPictureThumbnail"/>
+	</resultMap>
+	
+	<select id="findAllDynamicCirculates" resultMap="dynamicCirculateResult">
+		select * from xg_dynamicCirculate order by smallPictureCreateTime desc  limit 3
+	</select>
+	
+	<select id="getAllDynamicCirculateCount" resultType="Integer">
+			select count(*) from xg_dynamicCirculate
+	 </select>
+
+	 <select id="getAllDynamicCirculate" parameterType="Page" resultMap="dynamicCirculateResult">
+			select * from xg_dynamicCirculate  order by smallPictureCreateTime desc limit #{startPos},#{pageSize}
+	 </select> 
+	
+	<select id="findDynamicCirculateByDid"  parameterType="Integer" resultMap="dynamicCirculateResult">
+		select * from xg_dynamicCirculate where dId=#{dId}
+	</select>
+	
+	<insert id="saveDynamicCirculate" parameterType="DynamicCirculate">
+		insert into xg_dynamicCirculate(dId,bigPictureTitle,bigPictureContent,bigPictureThumbnail,smallPictureTitle,smallPictureCreateTime,smaliPictureThumbnail) values(null,#{bigPictureTitle},#{bigPictureContent},#{bigPictureThumbnail},#{smallPictureTitle},#{smallPictureCreateTime},#{smaliPictureThumbnail})
+	</insert>
+	
+	<update id="updateDynamicCirculateByDid" parameterType="DynamicCirculate">
+		update xg_dynamicCirculate xg set xg.bigPictureTitle=#{bigPictureTitle},xg.bigPictureContent=#{bigPictureContent},xg.bigPictureThumbnail=#{bigPictureThumbnail},xg.smallPictureTitle=#{smallPictureTitle},xg.smallPictureCreateTime=#{smallPictureCreateTime},xg.smaliPictureThumbnail=#{smaliPictureThumbnail} where xg.dId=#{dId} 
+	</update>
+	
+	<delete id="deleteDynamicCirculateByDid" parameterType="Integer">
+		delete from xg_dynamicCirculate where dId=#{dId}
+	</delete>
+	
+</mapper>

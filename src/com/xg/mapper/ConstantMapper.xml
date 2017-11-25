@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.ConstantMapper">
+<resultMap type="Constant" id="constantResult">
+		<result property="cId" column="cId"/>
+		<result property="cAddress" column="cAddress"/>
+		<result property="cTelephone" column="cTelephone"/>
+		<result property="cPhone" column="cPhone"/>
+		<result property="cPhone400" column="cPhone400"/>
+		<result property="cEmail" column="cEmail"/>
+		<result property="cTencent" column="cTencent"/>
+		<result property="cWechat" column="cWechat"/>
+		<result property="cWebsite" column="cWebsite"/>
+		<result property="cPostcode" column="cPostcode"/>
+		<result property="cExtra1" column="cExtra1"/>
+		<result property="cExtra2" column="cExtra2"/>
+		<result property="cExtra3" column="cExtra3"/>
+		<result property="cExtra4" column="cExtra4"/>
+		<result property="cExtra5" column="cExtra5"/>
+	</resultMap>
+	
+	<select id="findAllConstants" resultMap="constantResult">
+			select * from xg_constant
+	 </select>
+
+	<select id="findConstantByCid"  parameterType="Integer" resultMap="constantResult">
+		select * from xg_constant where cId=#{cId}
+	</select>
+	
+	<update id="updateConstantByCid" parameterType="Constant">
+			update xg_constant xg 
+		<set>  
+        <if test="cAddress != null and cAddress != '' ">  
+            xg.cAddress=#{cAddress},
+        </if>  
+       <if test="cTelephone != null and cTelephone != '' ">  
+            xg.cTelephone=#{cTelephone},
+        </if>
+      <if test="cPhone != null and cPhone != '' ">  
+           xg.cPhone=#{cPhone} ,
+        </if>
+      <if test="cPhone400 != null and cPhone400 != '' ">  
+           xg.cPhone400=#{cPhone400},
+        </if>
+       <if test="cEmail != null and cEmail != '' ">  
+           xg.cEmail=#{cEmail},
+        </if>
+       <if test="cTencent != null and cTencent != '' ">  
+          xg.cTencent=#{cTencent},
+        </if>
+       <if test="cWechat != null and cWechat != '' ">  
+          xg.cWechat=#{cWechat},
+        </if>
+      <if test="cWebsite != null and cWebsite != '' ">  
+          xg.cWebsite=#{cWebsite},
+        </if> 
+       <if test="cPostcode != null and cPostcode != '' ">  
+          xg.cPostcode=#{cPostcode},
+        </if> 
+      <if test="cExtra1 != null and cExtra1 != '' ">  
+          	xg.cExtra1=#{cExtra1},
+        </if>
+      <if test="cExtra2 != null and cExtra2 != '' ">  
+          	xg.cExtra2=#{cExtra2},
+        </if>   
+      <if test="cExtra3 != null and cExtra3 != '' ">  
+          	xg.cExtra3=#{cExtra3},
+        </if>   
+       <if test="cExtra4 != null and cExtra4 != '' ">  
+          	xg.cExtra4=#{cExtra4},
+        </if>
+      <if test="cExtra5 != null and cExtra5 != '' ">  
+          	xg.cExtra5=#{cExtra5}
+        </if>                                    
+    </set>  
+			where xg.cId=#{cId} 
+	</update>
+</mapper>

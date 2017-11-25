@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.CategoryMapper">
+<resultMap type="Category" id="categoryResult">
+		<result property="cId" column="cId"/>
+		<result property="cName" column="cName"/>
+	</resultMap>
+	
+	<select id="findAllCategorys" resultMap="categoryResult">
+		select * from xg_category
+	</select>
+	
+	<insert id="saveCategory" parameterType="Category">
+		insert into xg_category(cId,cName) values(null,#{cName})
+	</insert>
+	
+	<select id="findCategoryByCid"  parameterType="Integer" resultMap="categoryResult">
+		select * from xg_category where cId=#{cId}
+	</select>
+	
+	<update id="updateCategoryByCid" parameterType="Category">
+		update xg_category xg set xg.cName=#{cName} where xg.cId=#{cId} 
+	</update>
+	
+	<delete id="deleteCategoryByCid" parameterType="Integer">
+		delete from xg_category where cId=#{cId}
+	</delete>
+	
+</mapper>

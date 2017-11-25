@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.AdminMapper">
+<resultMap type="Admin" id="adminResult">
+		<result property="aId" column="aId"/>
+		<result property="aUserName" column="aUserName"/>
+		<result property="aPassword" column="aPassword"/>
+		<result property="aNickName" column="aNickName"/>
+		<result property="aEmail" column="aEmail"/>
+		<result property="aRegisterTime" column="aRegisterTime"/>
+		<result property="aLastLogonTime" column="aLastLogonTime"/>
+		<result property="aStatus" column="aStatus"/>
+		<result property="aCode" column="aCode"/>
+	</resultMap>
+	
+	<select id="checkLogin" parameterType="Admin" resultMap="adminResult">
+		select * from xg_admin where aUserName=#{aUserName} and aPassword=#{aPassword} and aStatus=1
+	</select>
+	
+	<select id="findByACode" parameterType="String" resultMap="adminResult">
+		select * from xg_admin where aCode=#{aCode}
+	</select>
+	
+	<select id="findByUsername" parameterType="String" resultMap="adminResult">
+		select * from xg_admin where aUserName=#{aUserName}
+	</select>
+	
+	<select id="findAllAdmins" resultMap="adminResult">
+		select * from xg_admin
+	</select>
+	
+	<select id="getAllAdminCount" resultType="long">
+			select count(*) from xg_admin
+	 </select>
+
+	 <select id="getAdmins" parameterType="Page" resultMap="adminResult">
+			select * from xg_admin limit #{startPos},#{pageSize}
+	 </select> 
+	 
+	 <insert id="saveAdmin" parameterType="Admin">
+		insert into xg_admin(aId,aUserName,aPassword,aNickName,aEmail,aRegisterTime,aStatus,aCode) values(null,#{aUserName},#{aPassword},#{aNickName},#{aEmail},#{aRegisterTime},#{aStatus},#{aCode})
+	</insert>
+	
+	<select id="findAdminByAid"  parameterType="Integer" resultMap="adminResult">
+		select * from xg_admin where aId=#{aId}
+	</select>
+	
+	<update id="updateAdminByAid" parameterType="Admin">
+		update xg_admin xg set xg.aNickName=#{aNickName},xg.aEmail=#{aEmail},xg.aLastLogonTime=#{aLastLogonTime} where xg.aId=#{aId} 
+	</update>
+	
+	<delete id="deleteAdminByAid" parameterType="Integer">
+		delete from xg_admin where aId=#{aId}
+	</delete>
+	
+</mapper>

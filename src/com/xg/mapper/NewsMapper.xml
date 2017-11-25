@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.NewsMapper">
+<resultMap type="News" id="newsResult">
+		<result property="nId" column="nId"/>
+		<result property="nTitle" column="nTitle"/>
+		<result property="nOutline" column="nOutline"/>
+		<result property="nContent" column="nContent"/>
+		<result property="nType" column="nType"/>
+		<result property="nLabel1" column="nLabel1"/>
+		<result property="nLabel2" column="nLabel2"/>
+		<result property="nCreateTime" column="nCreateTime"/>
+		<result property="nThumbnail" column="nThumbnail"/>
+		<result property="nChildType" column="nChildType"/>
+		<result property="nOnlookerNum" column="nOnlookerNum"/>
+	</resultMap>
+	
+	<select id="getAllNewsCount" resultType="long">
+			select count(*) from xg_news
+	 </select>
+
+	 <select id="getAllNews" parameterType="Page" resultMap="newsResult">
+			select * from xg_news  order by nCreateTime desc limit #{startPos},#{pageSize}
+	 </select> 
+	 
+	 <select id="getAllNewsWithNoPage" resultMap="newsResult">
+			select * from xg_news  order by nCreateTime desc  limit 4
+	 </select> 
+	
+	<select id="findNewsByNid"  parameterType="Integer" resultMap="newsResult">
+		select * from xg_news where nId=#{nId}
+	</select>
+	
+	<select id="getChildNewsCount" parameterType="Integer" resultType="long">
+			select count(*) from xg_news where nChildType=#{nChildType}
+	 </select>
+	 
+	<select id="getNewsByChildType" parameterType="Integer" resultMap="newsResult">
+			select * from xg_news where nChildType=#{0} order by nCreateTime desc limit #{1},#{2} 
+	 </select> 
+	 
+	 <select id="getNextNewsByChildType" parameterType="Integer" resultMap="newsResult">
+			select * from xg_news where nChildType=#{0}  limit #{1},#{2} 
+	 </select> 
+	
+	<insert id="saveNews" parameterType="News">
+		insert into xg_news(nId,nTitle,nOutline,nContent,nType,nLabel1,nLabel2,nCreateTime,nThumbnail,nChildType,nOnlookerNum) values(null,#{nTitle},#{nOutline},#{nContent},#{nType},#{nLabel1},#{nLabel2},#{nCreateTime},#{nThumbnail},#{nChildType},#{nOnlookerNum})
+	</insert>
+	
+	<update id="updateNewsByNid" parameterType="News">
+		update xg_news xg set xg.nTitle=#{nTitle},xg.nOutline=#{nOutline},xg.nContent=#{nContent},xg.nType=#{nType},xg.nLabel1=#{nLabel1},xg.nLabel2=#{nLabel2},xg.nCreateTime=#{nCreateTime},xg.nThumbnail=#{nThumbnail} ,xg.nChildType=#{nChildType},xg.nOnlookerNum=#{nOnlookerNum} where xg.nId=#{nId} 
+	</update>
+	
+	<delete id="deleteNewsByNid" parameterType="Integer">
+		delete from xg_news where nId=#{nId}
+	</delete>
+</mapper>

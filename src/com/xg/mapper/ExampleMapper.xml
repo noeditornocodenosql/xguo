@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.ExampleMapper">
+<resultMap type="Example" id="exampleResult">
+		<result property="eId" column="eId"/>
+		<result property="eProjectName" column="eProjectName"/>
+		<result property="eLabel" column="eLabel"/>
+		<result property="eLabel1" column="eLabel1"/>
+		<result property="eLabel2" column="eLabel2"/>
+		<result property="eThumbnail" column="eThumbnail"/>
+		<result property="eChildType" column="eChildType"/>
+		<result property="eURL" column="eURL"/>
+		<result property="eCreateTime" column="eCreateTime"/>
+	</resultMap>
+	
+	<select id="getAllExamplesCount" resultType="long">
+			select count(*) from xg_example
+	 </select>
+
+	 <select id="getAllExamples" parameterType="Page" resultMap="exampleResult">
+			select * from xg_example order by eCreateTime desc limit #{startPos},#{pageSize}
+	 </select> 
+	 
+	  <select id="getExamplesWithNoPage"  resultMap="exampleResult">
+			select * from xg_example limit 3
+	 </select> 
+	
+	<select id="findExampleByEid"  parameterType="Integer" resultMap="exampleResult">
+		select * from xg_example where eId=#{eId}
+	</select>
+	
+	<!-- 案例子分类 -->
+	<select id="getChildExampleCount" parameterType="Integer" resultType="long">
+			select count(*) from xg_example where eChildType=#{eChildType}
+	 </select>
+	 
+	 <!-- 案例子分类 -->
+	<select id="getExampleByChildType" parameterType="Integer" resultMap="exampleResult">
+			select * from xg_example where eChildType=#{0} order by eCreateTime desc limit #{1},#{2} 
+	 </select> 
+	 
+	  <!-- 案例详细页里的PREV&NEXT -->
+	<select id="getNextExampleByChildType" parameterType="Integer" resultMap="exampleResult">
+			select * from xg_example where eChildType=#{0}  limit #{1},#{2} 
+	 </select> 
+	 
+	<insert id="saveExample" parameterType="Example">
+		insert into xg_example(eId,eProjectName,eLabel,eLabel1,eLabel2,eCreateTime,eURL,eThumbnail,eChildType) values(null,#{eProjectName},#{eLabel},#{eLabel1},#{eLabel2},#{eCreateTime},#{eURL},#{eThumbnail},#{eChildType})
+	</insert>
+	
+	<update id="updateExampleByEid" parameterType="Example">
+		update xg_example xg set xg.eProjectName=#{eProjectName},xg.eLabel=#{eLabel},xg.eLabel1=#{eLabel1},xg.eLabel2=#{eLabel2},xg.eCreateTime=#{eCreateTime},xg.eURL=#{eURL},xg.eThumbnail=#{eThumbnail},xg.eChildType=#{eChildType}  where xg.eId=#{eId} 
+	</update>
+	
+	<delete id="deleteExampleByEid" parameterType="Integer">
+		delete from xg_example where eId=#{eId}
+	</delete>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.TeamMapper">
+<resultMap type="Team" id="teamResult">
+		<result property="tId" column="tId"/>
+		<result property="tTitle" column="tTitle"/>
+		<result property="tContent" column="tContent"/>
+		<result property="tThumbnail" column="tThumbnail"/>
+		<result property="tExtra1" column="tExtra1"/>
+		<result property="tExtra2" column="tExtra2"/>
+		<result property="tExtra3" column="tExtra3"/>
+	</resultMap>
+	
+	<select id="getAllTeamCount" resultType="long">
+			select count(*) from xg_team
+	 </select>
+	
+	<select id="findAllTeam"  parameterType="Page" resultMap="teamResult">
+		select * from xg_team order by tId asc limit #{startPos},#{pageSize}
+	</select>
+	
+	<select id="findAllTeamWithNoPage" resultMap="teamResult">
+		select * from xg_team
+	</select>
+	
+	<select id="findTeamByTid"  parameterType="Integer" resultMap="teamResult">
+		select * from xg_team where tId=#{tId}
+	</select>
+	
+	<update id="updateTeamByTid" parameterType="Team">
+		update xg_team xg set xg.tTitle=#{tTitle},xg.tContent=#{tContent},xg.tThumbnail=#{tThumbnail} ,xg.tExtra1=#{tExtra1},xg.tExtra2=#{tExtra2} where xg.tId=#{tId} 
+	</update>
+	
+	<delete id="deleteTeamByTid" parameterType="Integer">
+		delete from xg_team where tId=#{tId}
+	</delete>
+	
+	<insert id="saveTeam" parameterType="News">
+		insert into xg_team(tId,tTitle,tContent,tThumbnail,tExtra1,tExtra2,tExtra3) values(null,#{tTitle},#{tContent},#{tThumbnail},#{tExtra1},#{tExtra2},#{tExtra3})
+	</insert>
+</mapper>
